@@ -10,7 +10,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Angular 11 - MSAL v2 Quickstart Sample';
+  title = 'Avocados App';
   isIframe = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
@@ -39,25 +39,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
-      if (this.msalGuardConfig.authRequest) {
-        this.authService.loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
-          .subscribe((response: AuthenticationResult) => {
-            this.authService.instance.setActiveAccount(response.account);
-          });
-      } else {
-        this.authService.loginPopup()
-          .subscribe((response: AuthenticationResult) => {
-            this.authService.instance.setActiveAccount(response.account);
-          });
-      }
-    } else {
+
       if (this.msalGuardConfig.authRequest) {
         this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
       } else {
         this.authService.loginRedirect();
       }
-    }
+
   }
 
   logout() {

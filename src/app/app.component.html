@@ -1,14 +1,62 @@
-<mat-toolbar color="primary">
-  <a class="title" href="/">{{ title }}</a>
-
+<mat-toolbar class="mat-elevation-z8">
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Avocados App
   <div class="toolbar-spacer"></div>
-
   <a mat-button [routerLink]="['profile']">Profile</a>
 
   <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
   <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
 </mat-toolbar>
-<div class="container">
-  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-  <router-outlet *ngIf="!isIframe"></router-outlet>
-</div>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <div >
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">home</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">donut_small</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">assignment_ind</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">warning</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">person</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">brightness_7</mat-icon>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon class="material-icons">developer_board</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button">
+      <mat-icon class="material-icons color_white">help</mat-icon>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav #uploadFile class="upload" position="end"> </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <button
+        class="upload-button"
+        mat-raised-button
+        (click)="uploadFile.toggle()"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+        UPLOAD FILE
+      </button>
+    </div>
+    <div style="padding: 40px 20px"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
